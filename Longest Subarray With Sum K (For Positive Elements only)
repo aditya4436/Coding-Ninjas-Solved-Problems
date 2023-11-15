@@ -1,0 +1,21 @@
+    int n=arr.size();
+    int i=0, j=0, maxlen=0;
+    long long sum=arr[0];
+    while(j<n)
+    {
+        while(i<=j && sum>k)
+        {
+            sum-=arr[i];
+            i++;
+        }
+        if(sum==k)
+        {
+            maxlen=max(maxlen, j-i+1);
+        }
+        j++;
+        if(j<n)
+        {
+            sum+=arr[j];
+        }
+    }
+    return maxlen;
