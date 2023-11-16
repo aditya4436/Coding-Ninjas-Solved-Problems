@@ -1,0 +1,6 @@
+int majorityElement(vector<int> v)
+{
+	int n=v.size();
+	sort(v.begin(), v.end());
+	return v[n/2];
+}
