@@ -4,3 +4,41 @@ int majorityElement(vector<int> v)
 	sort(v.begin(), v.end());
 	return v[n/2];
 }
+
+
+// MOORE'S ALGORITHM OPTIMIZED APPROACH
+// Time Complexity:- O(n)
+// Space Complexity:- O(1)
+// int MajorityElement(vector<int> arr)
+// {
+//     int num=arr[0], count=0;
+//     for(int i=0; i<arr.size(); i++)
+//     {
+//         if(arr[i]==num)
+//         {
+//             count++;
+//         }
+//         else if(arr[i]!=num)
+//         {
+//             count--;
+//         }
+//         if(count==0)
+//         {
+//             num=arr[i];
+//             count++;
+//         }
+//     }
+//     int count2=0;
+//     for(int i=0; i<arr.size(); i++)
+//     {
+//         if(arr[i]==num)
+//         {
+//             count2++;
+//         }
+//         if(count2>arr.size()/2)
+//         {
+//             return num;
+//         }
+//     }
+//     return -1;
+// }
