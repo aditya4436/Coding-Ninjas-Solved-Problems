@@ -1,0 +1,15 @@
+vector<int> Leaders(vector<int> &arr)
+{
+    int maximum=INT_MIN;
+    vector<int> result;
+    for(int i=arr.size()-1; i>=0; i--)
+    {
+        if(arr[i]>maximum)
+        {
+            result.push_back(arr[i]);
+        }
+        maximum=max(arr[i], maximum);
+    }
+    sort(result.begin(), result.end());
+    return result;
+}
