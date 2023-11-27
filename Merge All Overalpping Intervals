@@ -1,0 +1,29 @@
+vector<vector<int>> mergeOverlappingIntervals(vector<vector<int>> &arr)
+{
+	// Write your code here.
+    vector<vector<int>> ans;
+    int n=arr.size();
+    sort(arr.begin(), arr.end());
+    for(int i=0; i<n; i++)
+    {
+        int start=arr[i][0];
+        int last=arr[i][1];
+        if(!ans.empty() && last<=ans.back()[1])
+        {
+            continue;
+        }
+        for(int j=i+1; j<n; j++)
+        {
+            if(arr[j][0]<=last)
+            {
+                last=max(last, arr[j][1]);
+            }
+            else
+            {
+                break;
+            }
+        }
+        ans.push_back({start, last});
+    }
+    return ans;
+}
