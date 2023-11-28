@@ -26,3 +26,24 @@ vector<int> findMissingRepeatingNumbers(vector < int > arr)
     }
     return{repeating, missing};
 }
+
+//OPTIMIZED APPROACH
+
+vector<int> findMissingRepeatingNumbers(vector < int > arr) {
+    // Write your code here
+    long long n=arr.size();
+    long long sn=(n*(n+1))/2;   //Sum of natural numbers
+    long long s2n=(n*(n+1)*(2*n+1))/6;  //Sum of squares of natural number
+    long long s=0, s2=0;
+    for(int i=0; i<n; i++)
+    {
+        s+=arr[i];  // Sum of array elements
+        s2+=(long long)arr[i]*(long long)arr[i];  //Sum of squares of array elements
+    }
+    long long val1=s-sn;
+    long long val2=s2-s2n;
+    val2=val2/val1;
+    long long x=(val1+val2)/2;
+    long long y=x-(val1);
+    return {(int)x, (int)y};
+}
