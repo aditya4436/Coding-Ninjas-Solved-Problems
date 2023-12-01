@@ -1,0 +1,58 @@
+int FirstOccurence(vector<int> &arr, int target)
+{
+    int low=0, high=arr.size()-1;
+    int first=-1;
+    while(low<=high)
+    {
+        int mid=(low+high)/2;
+        if(arr[mid]==target)
+        {
+            first=mid;
+            high=mid-1;
+        }
+        else if(arr[mid]<target)
+        {
+            low=mid+1;
+        }
+        else
+        {
+            high=mid-1;
+        }
+    }
+    return first;
+}
+int LastOccurence(vector<int> &arr, int target)
+{
+    int low=0, high=arr.size()-1;
+    int second=-1;
+    while(low<=high)
+    {
+        int mid=(low+high)/2;
+        if(arr[mid]==target)
+        {
+            second=mid;
+            low=mid+1;
+        }
+        else if(arr[mid]<target)
+        {
+            low=mid+1;
+        }
+        else
+        {
+            high=mid-1;
+        }
+    }
+    return second;
+}
+int count(vector<int>& arr, int n, int x)
+{
+	// Write Your Code Here
+	int first=FirstOccurence(arr, x);
+	if(first==-1 || arr[first]!=x)
+	{
+		return 0;
+	}
+	int last=LastOccurence(arr, x);
+	int ans=last-first+1;
+	return ans;
+}
