@@ -23,3 +23,23 @@ vector<vector<int>> permutations(vector<int> &vec, int size) {
     GeneratePermutations(vec, ds, ans, freq);
     return ans;
 }
+
+// OPTIMIZED APPROACH
+#include <bits/stdc++.h> 
+void GeneratePermutations(int index, vector<int> &arr,vector<vector<int>> &ans){
+    if(index==arr.size()){
+        ans.push_back(arr);
+        return;
+    }
+    for(int i=index; i<arr.size(); i++){
+        swap(arr[index], arr[i]);
+        GeneratePermutations(index+1, arr, ans);
+        swap(arr[index], arr[i]);
+    }
+}
+vector<vector<int>> permutations(vector<int> &vec, int size) {
+    // Write your code here.
+    vector<vector<int>> ans;
+    GeneratePermutations(0, vec, ans);
+    return ans;
+}
