@@ -1,0 +1,25 @@
+#include <bits/stdc++.h> 
+void GeneratePermutations(vector<int> &arr, vector<int> &ds, vector<vector<int>> &ans, int freq[]){
+    if(ds.size()==arr.size()){
+        ans.push_back(ds);
+        return;
+    }
+    for(int i=0; i<arr.size(); i++){
+        if(freq[i]==0){
+            ds.push_back(arr[i]);
+            freq[i]=1;
+            GeneratePermutations(arr, ds, ans, freq);
+            freq[i]=0;
+            ds.pop_back();
+        }
+    }
+}
+vector<vector<int>> permutations(vector<int> &vec, int size) {
+    // Write your code here.
+    vector<vector<int>> ans;
+    vector<int> ds;
+    size=vec.size();
+    int freq[size] = {0};
+    GeneratePermutations(vec, ds, ans, freq);
+    return ans;
+}
