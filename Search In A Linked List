@@ -1,0 +1,12 @@
+int Search(struct Node *head, int n){
+	int i=0;
+	struct Node *temp=head;
+	while(temp){
+		if(temp->data==n){
+			return i;
+		}
+		temp=temp->next;
+		i++;
+	}
+	return -1;
+}
