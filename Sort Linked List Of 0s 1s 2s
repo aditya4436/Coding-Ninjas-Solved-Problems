@@ -1,0 +1,58 @@
+/*
+Following is the class structure of the Node class:
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+    Node()
+    {
+        this->data = 0;
+        next = NULL;
+    }
+    Node(int data)
+    {
+        this->data = data; 
+        this->next = NULL;
+    }
+    Node(int data, Node* next)
+    {
+        this->data = data;
+        this->next = next;
+    }
+};
+*/
+
+Node* sortList(Node *head){
+    // Write your code here.
+    if(head==NULL || head->next==NULL){
+        return head;
+    }
+    Node *dummy0=new Node(-1), *dummy1=new Node(-1), *dummy2=new Node(-1);
+    Node *list0=dummy0, *list2=dummy2, *list1=dummy1;
+    Node *temp=head;
+    while(temp!=NULL){
+        if(temp->data==0){
+            list0->next=temp;
+            list0=temp;
+        }
+        if(temp->data==1){
+            list1->next=temp;
+            list1=temp;
+        }
+        if(temp->data==2){
+            list2->next=temp;
+            list2=temp;
+        }
+        temp=temp->next;
+    }
+    list0->next=dummy1->next ? dummy1->next : dummy2->next;
+    list1->next=dummy2->next;
+    list2->next=NULL;
+    struct Node *newHead=dummy0->next;
+    delete(dummy0);
+    delete(dummy1);
+    delete(dummy2);
+    return newHead;
+}
