@@ -1,0 +1,39 @@
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    template <typename T>
+    class TreeNode {
+       public:
+        T data;
+        TreeNode<T> *left;
+        TreeNode<T> *right;
+
+        TreeNode(T data) {
+            this->data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+************************************************************/
+
+int lowestCommonAncestor(TreeNode<int> *root, int x, int y)
+{
+	//    Write your code here
+    if (!root || root->data == x || root->data == y) {
+        return root ? root->data : -1; // Return -1 if the node is null
+    }
+    int leftLCA=lowestCommonAncestor(root->left, x, y);
+    int rightLCA=lowestCommonAncestor(root->right, x, y);
+    if(leftLCA!=-1 && rightLCA!=-1){
+        return root->data;
+    }
+    if(leftLCA==-1){
+        return rightLCA;
+    }
+    if(rightLCA==-1){
+        return leftLCA;
+    }
+    return root->data;
+}
