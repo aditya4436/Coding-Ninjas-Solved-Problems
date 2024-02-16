@@ -1,0 +1,85 @@
+#include<bits/stdc++.h>
+/************************************************************
+
+    Following is the Binary Tree node structure
+
+    class BinaryTreeNode 
+    {
+        public : 
+        T data;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
+
+        BinaryTreeNode(T data) 
+        {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+************************************************************/
+BinaryTreeNode<int>* markParent(BinaryTreeNode<int>* root, map<BinaryTreeNode<int>*, BinaryTreeNode<int>*> &make_parent, int &start){
+    queue<BinaryTreeNode<int>*> q;
+    q.push(root);
+    BinaryTreeNode<int>* res;
+    while(!q.empty()){
+        BinaryTreeNode<int>* node=q.front();
+        q.pop();
+        if(node->data==start){
+            res=node;
+        }
+        if(node->left){
+            make_parent[node->left]=node;
+            q.push(node->left);
+        }
+        if(node->right){
+            make_parent[node->right]=node;
+            q.push(node->right);
+        }
+    }
+    return res;
+}
+int findMaxDistance(map<BinaryTreeNode<int>*, BinaryTreeNode<int>*> &make_parent, BinaryTreeNode<int>* target){
+    queue<BinaryTreeNode<int>*> q;
+    q.push(target);
+    map<BinaryTreeNode<int>*, int> vis;
+    vis[target]=1;
+    int maxi=0;
+    while(!q.empty()){
+        int size=q.size();
+        int flag=0;
+        for(int i=0; i<size; i++){
+            BinaryTreeNode<int> *node=q.front();
+            q.pop();
+            if(node->left && !vis[node->left]){
+                flag=1;
+                vis[node->left]=1;
+                q.push(node->left);
+            }
+            if(node->right && !vis[node->right]){
+                flag=1;
+                vis[node->right]=1;
+                q.push(node->right);
+            }
+            if(make_parent[node] && !vis[make_parent[node]]){
+                flag=1;
+                vis[node]=1;
+                q.push(make_parent[node]);
+            }
+        }
+        if(flag){
+            maxi++;
+        }
+    }
+    return maxi;
+}
+
+int timeToBurnTree(BinaryTreeNode<int>* root, int start)
+{
+    // Write your code here
+    map<BinaryTreeNode<int>*, BinaryTreeNode<int>*> make_parent;
+    BinaryTreeNode<int>* target=markParent(root, make_parent, start);
+    int maxi=findMaxDistance(make_parent, target);
+    return maxi;
+}
