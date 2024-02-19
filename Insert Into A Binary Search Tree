@@ -1,0 +1,37 @@
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    template <typename T>
+    class TreeNode
+    {
+    public:
+        T val;
+        TreeNode<T> *left, *right;
+        TreeNode() : val(0), left(NULL), right(NULL) {}
+        TreeNode(T x) : val(x), left(NULL), right(NULL) {}
+        TreeNode(T x, TreeNode<T> *left, TreeNode<T> *right) : val(x), left(left), right(right) {}
+    };
+
+
+************************************************************/
+TreeNode<int> *newNode(int data){
+    TreeNode<int> *node=new TreeNode<int>(data);
+    node->left=NULL;
+    node->right=NULL;
+    return node;
+}
+TreeNode<int>* insertionInBST(TreeNode<int>* root, int val)
+{
+    // Write your code here.
+    if(!root){
+        return newNode(val);
+    }
+    else if(val<root->val){
+        root->left=insertionInBST(root->left, val);
+    }
+    else if(val>root->val){
+        root->right=insertionInBST(root->right, val);
+    }
+    return root;
+}
