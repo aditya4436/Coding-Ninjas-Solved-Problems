@@ -1,0 +1,38 @@
+#include <bits/stdc++.h> 
+void dfs(int node, vector<int> &vis, stack<int> &st, vector<vector<int>> &graph){
+    vis[node]=1;
+    for(auto it : graph[node]){
+        if(!vis[it]){
+            dfs(it, vis, st, graph);
+        }
+    }
+    st.push(node);
+}
+vector<int> topologicalSort(vector<vector<int>> &edges, int v, int e)  {
+    // Write your code here
+    vector<vector<int>> graph(v);
+    for (const auto &edge : edges) {
+        int from = edge[0];
+        int to = edge[1];
+        graph[from].push_back(to);
+    }
+
+    
+    stack<int> st;
+    vector<int> vis(v, 0);
+
+    for(int i=0; i<v; i++){
+        if(vis[i]==0){
+            dfs(i, vis, st, graph);
+        }
+    }
+
+    vector<int> ans;
+
+    while(!st.empty()){
+        ans.push_back(st.top());
+        st.pop();
+    }
+
+    return ans;
+}
