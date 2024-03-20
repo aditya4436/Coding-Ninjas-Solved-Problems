@@ -1,0 +1,23 @@
+void combinationSumHelper(int start, int k, int n, vector<int> &temp, vector<vector<int>> &ans){
+    if(n==0 && k==0){
+        ans.push_back(temp);
+        return;
+    }
+
+    if(start>9 || k==0 || n==0){
+        return;
+    }
+    
+    temp.push_back(start);
+    combinationSumHelper(start+1, k-1, n-start, temp, ans);
+
+    temp.pop_back();
+    combinationSumHelper(start+1, k, n, temp, ans);
+}
+vector<vector<int>> combinationSum(int k, int n) {
+    // Write Your Code Here
+    vector<int> temp;
+    vector<vector<int>> ans;
+    combinationSumHelper(1, k, n, temp, ans);
+    return ans;
+}
